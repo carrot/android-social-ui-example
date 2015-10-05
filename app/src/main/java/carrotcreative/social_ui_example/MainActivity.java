@@ -1,16 +1,45 @@
 package carrotcreative.social_ui_example;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.carrotcreative.socialui.util.SocialActionHandler;
+import com.carrotcreative.socialui.widget.SocialTextView;
 
 public class MainActivity extends AppCompatActivity
 {
+    private SocialTextView mTextView;
+
+    SocialActionHandler mHandler = new SocialActionHandler()
+    {
+        @Override
+        public void handleHashtag(String hashtag)
+        {
+            Toast.makeText(MainActivity.this, "Hashtag: " + hashtag, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void handleMention(String mention)
+        {
+            Toast.makeText(MainActivity.this, "Mention: " + mention, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void handleUrl(String url)
+        {
+            Toast.makeText(MainActivity.this, "URL: " + url, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void handleEmail(String email)
+        {
+            Toast.makeText(MainActivity.this, "Email: " + email, Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -19,6 +48,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mTextView = (SocialTextView) findViewById(R.id.social_text_example);
+        mTextView.linkify(mHandler);
     }
 
     @Override
