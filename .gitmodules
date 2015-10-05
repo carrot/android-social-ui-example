@@ -1,0 +1,3 @@
+[submodule "android-social-ui"]
+	path = android-social-ui
+	url = git@github.com:carrot/android-social-ui.git
